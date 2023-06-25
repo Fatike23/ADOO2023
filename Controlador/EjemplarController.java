@@ -43,12 +43,12 @@ public class EjemplarController {
 	}
 
 	public void modificarPlazoPrestamo(int idEjemplar, int plazo) {
-		Ejemplar ejemplar = buscarEjemplar(idEjemplar);
+		Ejemplar ejemplar = buscarEjemplarId(idEjemplar);
 		ejemplar.setPlazoPrestamo(plazo);
 	}
 
 	// Busqueda por fecha de publicacion
-	public List<Ejemplar> buscarEjemplares(Data fechaPublicacion) {
+	public List<Ejemplar> buscarEjemplaresFecha(Data fechaPublicacion) {
 		List<Ejemplar> coincidencias = new ArrayList<Ejemplar>();
 		for (Ejemplar ej : ejemplares){
 			if (ej.getFechaPublicacion().equals(fechaPublicacion)){
@@ -59,7 +59,7 @@ public class EjemplarController {
 	}
 
 	//Busqueda por autor
-	public List<Ejemplar> buscarEjemplares(String autor) {
+	public List<Ejemplar> buscarEjemplaresAut(String autor) {
 		List<Ejemplar> coincidencias = new ArrayList<Ejemplar>();
 		for (Ejemplar ej : ejemplares){
 			if (ej.getAutor().equals(autor)){
@@ -70,7 +70,7 @@ public class EjemplarController {
 	}
 
 	//Busqueda por categoria
-	public List<Ejemplar> buscarEjemplares(Categoria categoria) {
+	public List<Ejemplar> buscarEjemplaresCat(Categoria categoria) {
 		List<Ejemplar> coincidencias = new ArrayList<Ejemplar>();
 		for (Ejemplar ej : ejemplares){
 			if (ej.getCategory().equals(categoria)){
@@ -92,7 +92,7 @@ public class EjemplarController {
 	}
 
 
-	public Ejemplar buscarEjemplar(int idEjemplar) {
+	public Ejemplar buscarEjemplarId(int idEjemplar) {
 		int i = 0;
 		while (ejemplares.get(i).getId() != idEjemplar)
 			i++;
@@ -100,8 +100,12 @@ public class EjemplarController {
 	}
 
 	public void bajaEjemplar(int idEjemplar) {
-		Ejemplar ejemplar = buscarEjemplar(idEjemplar);
+		Ejemplar ejemplar = buscarEjemplarId(idEjemplar);
 		ejemplares.remove(ejemplar);
+	}
+
+	public ArrayList<Ejemplar> getEjemplares() {
+		return ejemplares;
 	}
 
 }
