@@ -4,14 +4,15 @@ import java.util.*;
 
 public class RevistaEspecializada extends Ejemplar {
 
-	public RevistaEspecializada() {
+	public RevistaEspecializada(String titulo, Date fechaPublicacion, String autor, Categoria categoria) {
+		super(titulo, fechaPublicacion, autor, categoria);
 	}
 
 	private Integer plazoPrestamo = 5;
 
-	public Integer getPlazoPrestamo() {
+	public int getPlazoPrestamo() {
 		// TODO implement here
-		return null;
+		return this.plazoPrestamo;
 	}
 
 	public void setPlazoPrestamo(int plazo) {

@@ -1,47 +1,107 @@
 package controladores;
 
-import modelo.Ejemplar;
-import modelo.Categoria;
+import modelo.*;
+
 import java.util.*;
 
 import javax.xml.crypto.Data;
 
 public class EjemplarController {
 
-	public EjemplarController() {
+	// ATRIBUTOS
+	private static EjemplarController instance;
+	private ArrayList<Ejemplar> ejemplares;
+	private int idSiguiente;
+
+	// GET INSTANCE (Patron Singleton)
+	public static EjemplarController getInstance() {
+		if (instance == null)
+			instance = new EjemplarController();
+		return instance;
 	}
 
-	private List<Ejemplar> ejemplares;
-
-
-	public void altaEjemplar(Categoria categoria, String autor, Date fechaPublicacion, String titulo) {
-		// TODO implement here
-		return;
+	// CONSTRUCTOR PRIVADO
+	private EjemplarController(){
+		ejemplares = new ArrayList<Ejemplar>();
+		idSiguiente = 1000;
 	}
 
-	public void modificarPlazoPrestamo(Ejemplar ejemplar, int plazo) {
-		// TODO implement here
-		return;
+	public void altaEjemplar(String titulo, Date fechaPublicacion, String autor, Categoria categoria) {
+
+		Ejemplar nuevoEjemplar;
+		if (categoria.equals(Categoria.LIBRO)){
+			nuevoEjemplar = new Libro(titulo, fechaPublicacion, autor, categoria);
+		} else if (categoria.equals(Categoria.REVISTA)) {
+			nuevoEjemplar = new Revista(titulo, fechaPublicacion, autor, categoria);
+		} else if (categoria.equals(Categoria.REVISTAESPECIALIZADA)){
+			nuevoEjemplar = new RevistaEspecializada(titulo, fechaPublicacion, autor, categoria);
+		} else {
+			nuevoEjemplar = new Diario(titulo, fechaPublicacion, autor, categoria);
+		}
+		ejemplares.add(nuevoEjemplar);
+
 	}
 
-	public List<Ejemplar> buscarEjemplares(Data fechaPublicacion, String autor, String titulo, Categoria categoria) {
-		// TODO implement here
-		return null;
+	public void modificarPlazoPrestamo(int idEjemplar, int plazo) {
+		Ejemplar ejemplar = buscarEjemplar(idEjemplar);
+		ejemplar.setPlazoPrestamo(plazo);
+	}
+
+	// Busqueda por fecha de publicacion
+	public List<Ejemplar> buscarEjemplares(Data fechaPublicacion) {
+		List<Ejemplar> coincidencias = new ArrayList<Ejemplar>();
+		for (Ejemplar ej : ejemplares){
+			if (ej.getFechaPublicacion().equals(fechaPublicacion)){
+				coincidencias.add(ej);
+			}
+		}
+		return coincidencias;
+	}
+
+	//Busqueda por autor
+	public List<Ejemplar> buscarEjemplares(String autor) {
+		List<Ejemplar> coincidencias = new ArrayList<Ejemplar>();
+		for (Ejemplar ej : ejemplares){
+			if (ej.getAutor().equals(autor)){
+				coincidencias.add(ej);
+			}
+		}
+		return coincidencias;
+	}
+
+	//Busqueda por categoria
+	public List<Ejemplar> buscarEjemplares(Categoria categoria) {
+		List<Ejemplar> coincidencias = new ArrayList<Ejemplar>();
+		for (Ejemplar ej : ejemplares){
+			if (ej.getCategory().equals(categoria)){
+				coincidencias.add(ej);
+			}
+		}
+		return coincidencias;
+	}
+
+	//Busqueda titulo
+	public List<Ejemplar> buscarEjemplaresTitulo(String titulo) {
+		List<Ejemplar> coincidencias = new ArrayList<Ejemplar>();
+		for (Ejemplar ej : ejemplares){
+			if (ej.getTitulo().equals(titulo)){
+				coincidencias.add(ej);
+			}
+		}
+		return coincidencias;
 	}
 
 
 	public Ejemplar buscarEjemplar(int idEjemplar) {
-		// TODO implement here
-		return null;
-	}
-
-	public void Operation1() {
-		// TODO implement here
+		int i = 0;
+		while (ejemplares.get(i).getId() != idEjemplar)
+			i++;
+		return ejemplares.get(i);
 	}
 
 	public void bajaEjemplar(int idEjemplar) {
-		// TODO implement here
-		return;
+		Ejemplar ejemplar = buscarEjemplar(idEjemplar);
+		ejemplares.remove(ejemplar);
 	}
 
 }
