@@ -20,7 +20,7 @@ public class SocioController {
 		return instance;
 	}
 
-	// CONSTRUCTOR PRIVADO
+	// CONSTRUCTOR PRIVATE
 	private SocioController(){
 		socios = new ArrayList<Socio>();
 		idSiguiente = 1000;
@@ -53,5 +53,9 @@ public class SocioController {
 		while (socios.get(i).getDNI() != dniSocio)
 			i++;
 		return socios.get(i);
+	}
+
+	public ArrayList<Socio> getSocios() {
+		return socios;
 	}
 }
