@@ -41,7 +41,7 @@ public class PrestamoController {
 	}
 	public void crearPrestamo(int idEjemplar, int dniSocio) {
 		EjemplarController EC = EjemplarController.getInstance();
-		Ejemplar ejemplar = EC.buscarEjemplar(idEjemplar);
+		Ejemplar ejemplar = EC.buscarEjemplarId(idEjemplar);
 
 		SocioController SC = SocioController.getInstance();
 		Socio socio = SC.buscarSocio(dniSocio);
@@ -49,7 +49,7 @@ public class PrestamoController {
 		Prestamo nuevoPrestamo;
 		nuevoPrestamo = new Prestamo(ejemplar, socio, ejemplar.getPlazoPrestamo());
 
-		socio.agrregarPrestamo(nuevoPrestamo);
+		socio.agregarPrestamo(nuevoPrestamo);
 
 		prestamos.add(nuevoPrestamo);
 	}
