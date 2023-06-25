@@ -72,8 +72,20 @@ public class Socio {
 		return this.dni;
 	}
 
-	public void agrregarPrestamo(Prestamo nuevoPrestamo) {
+	public void agregarPrestamo(Prestamo nuevoPrestamo) {
 		prestamos.add(nuevoPrestamo);
 		idsDePrestamos.add(nuevoPrestamo.getId());
 	}
+	
+	public String getNombre() {
+		return this.nombre;
+	}
+	
+	public String getMail() {
+		return this.mail;
+	}
+	public String getTelefono() {
+		return this.telefono;
+	}
+
 }
