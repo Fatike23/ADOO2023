@@ -1,15 +1,21 @@
 package modelo;
 
-import java.util.*;
 
-public class Finalizado {
 
-	public Finalizado() {
+public class Finalizado implements EstadoPrestamo {
+
+	private boolean enTermino;
+
+	public Finalizado(boolean enTermino) {
+		this.enTermino = enTermino;
 	}
 
-	public void finalizarPrestamo() {
-		// TODO implement here
-		return ;
+
+	public void finalizarPrestamo(Prestamo prestamo) {
+	}
+
+	public boolean isEnTermino(){
+		return enTermino;
 	}
 
 	@Override

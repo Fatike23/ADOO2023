@@ -5,7 +5,7 @@ import java.util.*;
 public class Socio {
 
 	private String nombre;
-	private Integer dni;
+	private int dni;
 	private String mail;
 	private String telefono;
 	public List<Prestamo> prestamos;
@@ -13,8 +13,10 @@ public class Socio {
 	private IEstadoConducta estado;
 	private int prestamosRealizados;
 	private Boolean suspendido;
-	private Integer diasBonificacion;
+	private int diasBonificacion;
 	private MedioComunicacion medioCom;
+	private int rachaDevoluciones;
+	private Notificador notificador;
 
 	public Socio(int dni, String nombre, String mail, String telefono, MedioComunicacion medioCom) {
 		this.nombre = nombre;
@@ -25,6 +27,7 @@ public class Socio {
 		this.notificador = new Notificador(medioCom, this);
 		prestamos = new ArrayList<>();
 		idsDePrestamos = new ArrayList<>();
+		rachaDevoluciones = 0;
 	}
 
 

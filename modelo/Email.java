@@ -1,6 +1,9 @@
 package modelo;
 
 import java.util.*;
+
+import static java.lang.System.out;
+
 public class Email implements EstrategiaNotificacion {
 
 	public Email() {

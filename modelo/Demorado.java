@@ -1,15 +1,8 @@
 package modelo;
 
-import java.util.*;
-
 public class Demorado implements EstadoPrestamo {
 
 	public Demorado() {
-	}
-
-	public void sumarDiaPenalizacion(Socio socio, Date fechaVencimiento) {
-		// TODO implement here
-		return ;
 	}
 
 	public void finalizarPrestamo(Prestamo prestamo) {
@@ -18,4 +11,8 @@ public class Demorado implements EstadoPrestamo {
 		prestamo.setEstado(new Finalizado(false));
 	}
 
+	@Override
+	public String toString() {
+		return "Demorado";
+	}
 }

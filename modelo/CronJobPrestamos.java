@@ -9,8 +9,18 @@ import static modelo.Motivo.PROXVTO;
 
 public class CronJobPrestamos {
 
-	public CronJobPrestamos() {
+	private static CronJobPrestamos instance;
+
+	public static CronJobPrestamos getInstance(){
+		if (instance == null){
+			instance = new CronJobPrestamos();
+		}
+		return instance;
 	}
+
+	private CronJobPrestamos() {
+	}
+
 
 	private List<Prestamo> obtenerPrestamos() {
 		PrestamoController prestamoController = PrestamoController.getInstance();

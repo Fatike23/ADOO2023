@@ -8,6 +8,8 @@ import modelo.EstadoPrestamo;
 import modelo.Prestamo;
 import modelo.Socio;
 
+import static java.util.Calendar.DAY_OF_YEAR;
+
 public class PrestamoController {
 
 	// ATRIBUTOS
@@ -29,11 +31,11 @@ public class PrestamoController {
 	}
 
 	public void crearPrestamo(int idEjemplar, int dniSocio) {
-		EjemplarController EC = EjemplarController.getInstance();
-		Ejemplar ejemplar = EC.buscarEjemplarId(idEjemplar);
+		EjemplarController ejemplarController = EjemplarController.getInstance();
+		Ejemplar ejemplar = ejemplarController.buscarEjemplarId(idEjemplar);
 
-		SocioController SC = SocioController.getInstance();
-		Socio socio = SC.buscarSocio(dniSocio);
+		SocioController socioController = SocioController.getInstance();
+		Socio socio = socioController.buscarSocio(dniSocio);
 
 		Prestamo nuevoPrestamo;
 		nuevoPrestamo = new Prestamo(ejemplar, socio, ejemplar.getPlazoPrestamo());
@@ -44,7 +46,7 @@ public class PrestamoController {
 	}
 
 	public void finalizarPrestamo(int idPrestamo) {
-		//COMPLETAR
+		buscarPrestamo(idPrestamo).finalizarPrestamo();
 	}
 	public Prestamo buscarPrestamo(int idPrestamo) {
 		int i = 0;
