@@ -3,6 +3,7 @@ package controladores;
 import java.util.*;
 
 import modelo.Ejemplar;
+import modelo.MedioComunicacion;
 import modelo.Prestamo;
 import modelo.Socio;
 
@@ -26,8 +27,8 @@ public class SocioController {
 		idSiguiente = 1000;
 	}
 
-	public void altaSocio(int dni, String nombre, String mail, String telefono) {
-		Socio nuevoSocio = new Socio(dni, nombre, mail, telefono);
+	public void altaSocio(int dni, String nombre, String mail, String telefono, MedioComunicacion medioCom) {
+		Socio nuevoSocio = new Socio(dni, nombre, mail, telefono, medioCom);
 		socios.add(nuevoSocio);
 	}
 

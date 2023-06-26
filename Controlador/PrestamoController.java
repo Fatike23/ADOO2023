@@ -28,17 +28,6 @@ public class PrestamoController {
 		idSiguiente = 1000;
 	}
 
-	//Funcion para retrasar o adelantar la fecha de vencimietno del prestamo
-	//MODIFICA LA FECHA DE VENCIMIENTO DEL PRESTAMO, NO DEL EJEMPLAR.
-	public void modificarPlazoPrestamo(int idPrestamo, int diasModificar) {
-		Prestamo prestamo = buscarPrestamo(idPrestamo);
-		Date devolucionActual = prestamo.getDevolucion();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(devolucionActual);
-		calendar.add(Calendar.DAY_OF_YEAR, diasModificar); //DiasModificar Puede ser negativo
-		Date nuevaFecha = calendar.getTime();
-		prestamo.setFechaVencimiento(nuevaFecha);
-	}
 	public void crearPrestamo(int idEjemplar, int dniSocio) {
 		EjemplarController EC = EjemplarController.getInstance();
 		Ejemplar ejemplar = EC.buscarEjemplarId(idEjemplar);

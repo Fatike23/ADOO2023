@@ -24,22 +24,50 @@ public class Prestamo {
 	}
 
 	private void inicializarEstado() {
-		//INICIALIZAR ESTADO DEL PRESTAMO
-		//AL EMPEZAR SIEMPRE EMPIEZA EN CURSO
+		this.estado = new EnCurso();
 	}
 	public Date getDevolucion() {
-		//return this.fechaDevolucion
-		return null;
+		return this.fechaDevolucion;
 	}
-	public Date calcularDevolucion(Socio socio, Ejemplar ejemplar) {
-		// return this.fechaDevolucion
-		return null;
+
+	public int diasRestantesHastaVencimiento() {
+		Date fechaActual = new Date();
+		long diff = fechaVencimiento.getTime() - fechaActual.getTime();
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+		return (int) diffDays;
 	}
+
 	public void finalizarPrestamo() {
-		// estado = finalizado
+		estado.finalizarPrestamo(this);
 	}
+
 	public int getId() {
 		return idPrestamo;
 	}
 
+	public EstadoPrestamo getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoPrestamo estado) {
+		this.estado = estado;
+	}
+
+	public Socio getSocio() {
+		return socio;
+	}
+
+	public Date getFechaVencimiento(){return this.fechaVencimiento;}
+
+	public Ejemplar getEjemplar() {
+		return this.ejemplar;
+	}
+
+	public Date getFechaDeCreacion() {
+		return this.fechaDeCreacion;
+	}
+
+	public Notificador getNotificadorSocio(){
+		return socio.getNotificador();
+	}
 }

@@ -12,4 +12,8 @@ public class Finalizado {
 		return ;
 	}
 
+	@Override
+	public String toString() {
+		return "Finalizado";
+	}
 }

@@ -38,11 +38,13 @@ public class Test {
 	}
 }
 /*
--Cargar nuevos socios.
--Cargar ejemplares (libros, revistas especializadas, revistas, diarios).
--Buscar ejemplares según el criterio solicitado y mostrar datos completos (incluyendo ubicación).
--Actualizar el estado de ejemplares prestados presencialmente o vía web (préstamo y devolución).
--Actualizar parámetros de préstamos (plazo en días).
--Notificar a socios acerca de situaciones particulares (próximo vencimiento, penalización por devolución fuera de término, premio por devoluciones).
--Visualizar el historial de préstamos de un socio.
+
+- OK ---> 1. Cargar nuevos socios.
+- OK ---> 2. Cargar ejemplares (libros, revistas especializadas, revistas, diarios).
+- OK ---> 3. Buscar ejemplares según el criterio solicitado y mostrar datos completos (incluyendo ubicación).
+- PENDIENTE ---> 4. Actualizar el estado de ejemplares prestados presencialmente o vía web (préstamo y devolución).
+- OK ---> 5. Actualizar parámetros de préstamos (plazo en días).
+- PENDIENTE ---> 6. Notificar a socios acerca de situaciones particulares (próximo vencimiento, penalización por devolución fuera de término, premio por devoluciones).
+- OK ---> 7. Visualizar el historial de préstamos de un socio.
+
 */

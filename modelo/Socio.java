@@ -11,24 +11,26 @@ public class Socio {
 	public List<Prestamo> prestamos;
 	private List<Integer> idsDePrestamos;
 	private IEstadoConducta estado;
-	private Integer prestamosRealizados;
-	private Integer diasPenalizacion;
+	private int prestamosRealizados;
 	private Boolean suspendido;
 	private Integer diasBonificacion;
 	private MedioComunicacion medioCom;
 
-	public Socio(int dni, String nombre, String mail, String telefono) {
+	public Socio(int dni, String nombre, String mail, String telefono, MedioComunicacion medioCom) {
 		this.nombre = nombre;
 		this.dni = dni;
 		this.mail = mail;
 		this.telefono = telefono;
+		this.medioCom = medioCom;
+		this.notificador = new Notificador(medioCom, this);
 		prestamos = new ArrayList<>();
 		idsDePrestamos = new ArrayList<>();
 	}
 
 
 	public int calcularModificacionPlazo() {
-		// TODO implement here
+		// CALCULAR CUANTOS PRESTAMOS HECHOS POR ESTE SOCIO HAN SIDO
+		// DEVUELTO 5 VECES DENTRO DEL PLAZO ESTIPULADO
 		return 0;
 	}
 
@@ -54,18 +56,15 @@ public class Socio {
 	}
 
 	public void penalizarSocio(int dias) {
-		// TODO implement here
-		return ;
-	}
-
-	public void bonificarSocio(int dias) {
-		// TODO implement here
-		return ;
+		rachaDevoluciones = 0;
+		this.diasBonificacion -= dias;
+		if (this.diasBonificacion <= -10) {
+			this.suspender(true);
+		}
 	}
 
 	private void suspender(Boolean bool) {
-		// TODO implement here
-		return ;
+		this.suspendido = bool;
 	}
 
 	public int getDNI() {
