@@ -10,6 +10,10 @@ import static modelo.Motivo.PREMIO;
 
 public class Notificador {
 
+	public CronJobPrestamos ejecuta;
+	private EstrategiaNotificacion estrategia;
+	private Socio socio;
+
 	public Notificador(MedioComunicacion medio, Socio socio) {
 		definirEstrategia(medio);
 		this.socio = socio;
@@ -28,8 +32,7 @@ public class Notificador {
 		}
 	}
 	public void enviarNotificacion(Notificacion notificacion) {
-		// TODO implement here
-		return ;
+		this.estrategia.enviarNotificacion(notificacion, socio);
 	}
 
 	public void setMedioNotificacion(MedioComunicacion estrategia) {
@@ -37,4 +40,19 @@ public class Notificador {
 		return ;
 	}
 
+	public void enviarNotificacionDeBonificacion() {
+		String titulo = "Has recibido un beneficio en tu biblioteca";
+		String mensaje = generarMensajeNotificacion();
+		Motivo motivo = PREMIO;
+		Notificacion notificacion = new Notificacion(titulo, mensaje, motivo);
+		estrategia.enviarNotificacion(notificacion, socio);
+	}
+
+	private String generarMensajeNotificacion() {
+		return "Estimado/a " + socio.getNombre() + " ha finalizado de manera anticipada y exitosa 5 devoluciones. Tiene un dia mas de bonificacion para devolver sus prestamos ";
+	}
+
+	public String getLink() {
+		return socio.getLink();
+	}
 }

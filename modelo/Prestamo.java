@@ -4,28 +4,42 @@ import java.util.*;
 
 public class Prestamo {
 
+	private static int idSiguiente = 1000;
 	private int idPrestamo;
 	private Ejemplar ejemplar;
 	private Date fechaVencimiento;
 	private Date fechaDevolucion;
+	private Date fechaDeCreacion;
 	private Socio socio;
 	private EstadoPrestamo estado;
 
 	public Prestamo(Ejemplar ejemplar, Socio socio, int plazoPrestamo) {
+		this.idPrestamo = idSiguiente;
+		idSiguiente++;
 		this.ejemplar = ejemplar;
-		//La fecha de vencimiento se calcula con el plazo del ejemplar.
-		//this.fechaVencimiento = fechaVencimiento;
-		//his.fechaDevolucion = fechaDevolucion;
 		this.socio = socio;
+		this.fechaDeCreacion = new Date();
+		this.fechaVencimiento = new Date();
+		fechaDevolucion = null;
+		modificarFechaVencimiento(ejemplar.getPlazoPrestamo() + socio.getDiasBonificacion());
 		inicializarEstado();
 	}
 	public  void setFechaVencimiento(Date FechaNueva) {
 		this.fechaVencimiento = FechaNueva;
 	}
 
+	public void modificarFechaVencimiento(int diasModificar){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fechaVencimiento);
+		calendar.add(Calendar.DAY_OF_YEAR, diasModificar); //DiasModificar Puede ser negativo
+		Date nuevaFecha = calendar.getTime();
+		this.fechaVencimiento= nuevaFecha;
+	}
+
 	private void inicializarEstado() {
 		this.estado = new EnCurso();
 	}
+
 	public Date getDevolucion() {
 		return this.fechaDevolucion;
 	}

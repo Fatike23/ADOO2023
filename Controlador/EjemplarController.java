@@ -48,10 +48,16 @@ public class EjemplarController {
 	}
 
 	// Busqueda por fecha de publicacion
-	public List<Ejemplar> buscarEjemplaresFecha(Data fechaPublicacion) {
+	public List<Ejemplar> buscarEjemplaresFecha(Date fechaPublicacion) {
 		List<Ejemplar> coincidencias = new ArrayList<Ejemplar>();
+
 		for (Ejemplar ej : ejemplares){
-			if (ej.getFechaPublicacion().equals(fechaPublicacion)){
+			Calendar cal1 = Calendar.getInstance();
+			cal1.setTime(fechaPublicacion);
+			Calendar cal2 = Calendar.getInstance();
+			cal1.setTime(ej.getFechaPublicacion());
+
+			if (cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH) && cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)){
 				coincidencias.add(ej);
 			}
 		}

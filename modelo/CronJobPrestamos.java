@@ -9,8 +9,18 @@ import static modelo.Motivo.PROXVTO;
 
 public class CronJobPrestamos {
 
-	public CronJobPrestamos() {
+	private static CronJobPrestamos instance;
+
+	public static CronJobPrestamos getInstance(){
+		if (instance == null){
+			instance = new CronJobPrestamos();
+		}
+		return instance;
 	}
+
+	private CronJobPrestamos() {
+	}
+
 
 	private List<Prestamo> obtenerPrestamos() {
 		PrestamoController prestamoController = PrestamoController.getInstance();
@@ -39,5 +49,19 @@ public class CronJobPrestamos {
 		Notificacion notificacion = new Notificacion(titulo, mensaje, motivo);
 		notificadorSocio.enviarNotificacion(notificacion);
 	}
+
+	public String definirMensajePorMotivo(Motivo motivo, int dias){
+		String mensaje;
+		if (motivo == PENALIZACION) {
+			dias = -dias;
+			mensaje = String.format("Tienes una penalizacion por haberte excedido %d dias.", dias);
+			return mensaje;
+		} else if (motivo == PROXVTO) {
+			mensaje = String.format("Tu prestamo esta proximo a vencer en %d dias.", dias);
+			return mensaje;
+		}
+		return "";
+	}
+
 
 }

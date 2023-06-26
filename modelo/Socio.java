@@ -2,10 +2,14 @@ package modelo;
 
 import java.util.*;
 
+import static modelo.MedioComunicacion.WHATSAPP;
+import static modelo.MedioComunicacion.SMS;
+import static modelo.MedioComunicacion.EMAIL;
+
 public class Socio {
 
 	private String nombre;
-	private Integer dni;
+	private int dni;
 	private String mail;
 	private String telefono;
 	public List<Prestamo> prestamos;
@@ -13,8 +17,10 @@ public class Socio {
 	private IEstadoConducta estado;
 	private int prestamosRealizados;
 	private Boolean suspendido;
-	private Integer diasBonificacion;
+	private int diasBonificacion;
 	private MedioComunicacion medioCom;
+	private int rachaDevoluciones;
+	private Notificador notificador;
 
 	public Socio(int dni, String nombre, String mail, String telefono, MedioComunicacion medioCom) {
 		this.nombre = nombre;
@@ -25,6 +31,7 @@ public class Socio {
 		this.notificador = new Notificador(medioCom, this);
 		prestamos = new ArrayList<>();
 		idsDePrestamos = new ArrayList<>();
+		rachaDevoluciones = 0;
 	}
 
 
@@ -42,6 +49,9 @@ public class Socio {
 	}
 
 	public List<Prestamo> getUltimosPrestamos(int cantidad) {
+		if (cantidad  >= prestamos.size()) {
+			return prestamos;
+		}
 		List<Prestamo> ultimosPrestamos = new ArrayList<>();
 		int total = prestamos.size();
 		for (int i = total; i > (total - cantidad); i--){
@@ -83,8 +93,34 @@ public class Socio {
 	public String getMail() {
 		return this.mail;
 	}
+
 	public String getTelefono() {
 		return this.telefono;
+	}
+
+	public int getDiasBonificacion(){
+		return diasBonificacion;
+	}
+
+	public void sumarRachaDevoluciones(){
+		rachaDevoluciones += 1;
+		if (rachaDevoluciones == 5) {
+			this.diasBonificacion++;
+			rachaDevoluciones = 0;
+			notificador.enviarNotificacionDeBonificacion();
+		}
+	}
+
+	public Notificador getNotificador() {
+		return this.notificador;
+	}
+
+	public String getLink(){
+		if (medioCom == EMAIL){
+			return this.mail;
+		} else {
+			return this.telefono;
+		}
 	}
 
 }

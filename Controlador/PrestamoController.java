@@ -8,6 +8,8 @@ import modelo.EstadoPrestamo;
 import modelo.Prestamo;
 import modelo.Socio;
 
+import static java.util.Calendar.DAY_OF_YEAR;
+
 public class PrestamoController {
 
 	// ATRIBUTOS
@@ -29,11 +31,11 @@ public class PrestamoController {
 	}
 
 	public void crearPrestamo(int idEjemplar, int dniSocio) {
-		EjemplarController EC = EjemplarController.getInstance();
-		Ejemplar ejemplar = EC.buscarEjemplarId(idEjemplar);
+		EjemplarController ejemplarController = EjemplarController.getInstance();
+		Ejemplar ejemplar = ejemplarController.buscarEjemplarId(idEjemplar);
 
-		SocioController SC = SocioController.getInstance();
-		Socio socio = SC.buscarSocio(dniSocio);
+		SocioController socioController = SocioController.getInstance();
+		Socio socio = socioController.buscarSocio(dniSocio);
 
 		Prestamo nuevoPrestamo;
 		nuevoPrestamo = new Prestamo(ejemplar, socio, ejemplar.getPlazoPrestamo());
@@ -43,13 +45,26 @@ public class PrestamoController {
 		prestamos.add(nuevoPrestamo);
 	}
 
-	public void finalizarPrestamo(int idPrestamo) {
-		//COMPLETAR
+	public void actualizarDiasPrestamo(int idPrestamo, int dias){
+		buscarPrestamo(idPrestamo).modificarFechaVencimiento(dias);
 	}
+
+	public void finalizarPrestamo(int idPrestamo) {
+		buscarPrestamo(idPrestamo).finalizarPrestamo();
+	}
+
 	public Prestamo buscarPrestamo(int idPrestamo) {
 		int i = 0;
 		while (prestamos.get(i).getId() != idPrestamo)
 			i++;
 		return prestamos.get(i);
+	}
+
+	public List<Prestamo> getPrestamos(){
+		return this.prestamos;
+	}
+
+	public Prestamo getUltimoPrestamo() {
+		return prestamos.get(prestamos.size() - 1);
 	}
 }
