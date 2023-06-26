@@ -12,9 +12,10 @@ public class Demorado implements EstadoPrestamo {
 		return ;
 	}
 
-	public void finalizarPrestamo() {
-		// TODO implement here
-		return ;
+	public void finalizarPrestamo(Prestamo prestamo) {
+		int diasAtraso = -prestamo.diasRestantesHastaVencimiento();
+		prestamo.getSocio().penalizarSocio(diasAtraso);
+		prestamo.setEstado(new Finalizado(false));
 	}
 
 }

@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.*;
 
-import api.SistemaExternoAdapter;
 
 public class Ejemplar implements SistemaExternoAdapter {
 

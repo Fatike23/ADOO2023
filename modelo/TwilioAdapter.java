@@ -9,7 +9,6 @@ public class TwilioAdapter {
 
 	private TwilioSDK twilio;
 
-
 	public void enviarSMS(Notificacion notificacion) {
 		// TODO implement here
 		return ;
@@ -19,5 +18,4 @@ public class TwilioAdapter {
 		// TODO implement here
 		return ;
 	}
-
 }
