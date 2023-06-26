@@ -45,13 +45,26 @@ public class PrestamoController {
 		prestamos.add(nuevoPrestamo);
 	}
 
+	public void actualizarDiasPrestamo(int idPrestamo, int dias){
+		buscarPrestamo(idPrestamo).modificarFechaVencimiento(dias);
+	}
+
 	public void finalizarPrestamo(int idPrestamo) {
 		buscarPrestamo(idPrestamo).finalizarPrestamo();
 	}
+
 	public Prestamo buscarPrestamo(int idPrestamo) {
 		int i = 0;
 		while (prestamos.get(i).getId() != idPrestamo)
 			i++;
 		return prestamos.get(i);
+	}
+
+	public List<Prestamo> getPrestamos(){
+		return this.prestamos;
+	}
+
+	public Prestamo getUltimoPrestamo() {
+		return prestamos.get(prestamos.size() - 1);
 	}
 }

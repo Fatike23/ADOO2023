@@ -4,6 +4,11 @@ import java.util.*;
 
 public class Notificacion {
 
+	private String titulo;
+	private String mensaje;
+	private Date fecha;
+	private Motivo motivo;
+
 	public Notificacion(String titulo, String mensaje, Motivo motivo) {
 		this.titulo = titulo;
 		this.mensaje = mensaje;

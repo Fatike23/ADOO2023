@@ -50,4 +50,18 @@ public class CronJobPrestamos {
 		notificadorSocio.enviarNotificacion(notificacion);
 	}
 
+	public String definirMensajePorMotivo(Motivo motivo, int dias){
+		String mensaje;
+		if (motivo == PENALIZACION) {
+			dias = -dias;
+			mensaje = String.format("Tienes una penalizacion por haberte excedido %d dias.", dias);
+			return mensaje;
+		} else if (motivo == PROXVTO) {
+			mensaje = String.format("Tu prestamo esta proximo a vencer en %d dias.", dias);
+			return mensaje;
+		}
+		return "";
+	}
+
+
 }

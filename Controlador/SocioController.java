@@ -59,4 +59,5 @@ public class SocioController {
 	public ArrayList<Socio> getSocios() {
 		return socios;
 	}
+
 }
